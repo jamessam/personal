@@ -13,5 +13,6 @@ export default Container;
 
 const styles = {
   margin: '0 auto',
+  maxWidth: '760px',
   textAlign: 'justify',
 };
