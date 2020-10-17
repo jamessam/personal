@@ -1,14 +1,20 @@
-import Head from 'next/head';
 import Container from '../components/Container';
 import ImageTile from '../components/ImageTile';
+import SEO from '../components/SEO';
 
 import { createClient } from 'contentful';
 
 const Home = (props) => {
-  const images = props.items[0].fields.sections[0].fields.images;
+  const images = props.fields.sections[0].fields.images;
 
   return (
     <div>
+      <SEO
+        title={`Jim Sam | ${props.fields.title}`}
+        description={props.fields.abstract}
+        url="https://www.jamessam.com/"
+        image={props.fields.favicon.fields.file.url}
+      />
       <Container>
         <div style={{ paddingTop: '10px', textAlign: 'center' }}>
           <ImageTile destination="/about" image={images[0]} />
@@ -35,8 +41,7 @@ Home.getInitialProps = async (ctx) => {
     content_type: 'page',
     'fields.slug': '/',
   });
-
-  return homePages;
+  return homePages.items[0];
 };
 
 export default Home;
