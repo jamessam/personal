@@ -1,4 +1,4 @@
-import Container from '../components/Container';
+import PageWrapper from '../components/PageWrapper';
 import ImageTile from '../components/ImageTile';
 import SEO from '../components/SEO';
 
@@ -15,7 +15,7 @@ const Contact = (props) => {
         url="https://www.jamessam.com/"
         image={props.fields.favicon.fields.file.url}
       />
-      <Container>
+      <PageWrapper>
         <div style={{ paddingTop: '10px', textAlign: 'center' }}>
           <ImageTile
             destination="mailto:jim -atsa- jamessam.com"
@@ -26,7 +26,7 @@ const Contact = (props) => {
             image={images[1]}
           />
         </div>
-      </Container>
+      </PageWrapper>
     </div>
   );
 };

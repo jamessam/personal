@@ -1,4 +1,4 @@
-import Container from '../components/Container';
+import PageWrapper from '../components/PageWrapper';
 import SEO from '../components/SEO';
 
 import { createClient } from 'contentful';
@@ -6,9 +6,9 @@ import { createClient } from 'contentful';
 const BlogHome = (props) => {
   return (
     <div>
-      <Container>
+      <PageWrapper>
         <h1>Blog</h1>
-      </Container>
+      </PageWrapper>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import Container from '../components/container';
+import PageWrapper from '../components/PageWrapper';
 import SEO from '../components/SEO';
 
 import { createClient } from 'contentful';
@@ -7,7 +7,6 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 const About = (props) => {
   const { seoObject, body } = props.fields;
   const bodyData = convertBody(body);
-  console.log(seoObject);
 
   return (
     <div>
@@ -17,7 +16,7 @@ const About = (props) => {
         url="https://www.jamessam.com/"
         image={seoObject.fields.image.fields.file.url}
       />
-      <Container>{bodyData}</Container>
+      <PageWrapper>{bodyData}</PageWrapper>
     </div>
   );
 };
@@ -37,23 +36,6 @@ const client = createClient({
   accessToken: process.env.ACCESS_TOKEN,
   environment: process.env.ENVIRONMENT_ID,
 });
-
-// export default ({ pageContext: { aboutPage } }) => {
-//   const { seoObject, body } = aboutPage.fields;
-//   const bodyData = convertBody(body);
-
-//   return (
-//     <div>
-//       <SEO
-//         title={seoObject.fields.title}
-//         description={seoObject.fields.description}
-//         url={seoObject.fields.url}
-//         image={seoObject.fields.image.fields.file.url}
-//       />
-//       <Container>{bodyData}</Container>
-//     </div>
-//   );
-// };
 
 const convertBody = (rawJSON) => {
   const options = {

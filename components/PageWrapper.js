@@ -1,7 +1,7 @@
 import Header from './Header';
 import Footer from './Footer';
 
-const Container = ({ children }) => (
+const PageWrapper = ({ children }) => (
   <div>
     <Header />
     <div style={styles}>{children}</div>
@@ -9,7 +9,7 @@ const Container = ({ children }) => (
   </div>
 );
 
-export default Container;
+export default PageWrapper;
 
 const styles = {
   margin: '0 auto',

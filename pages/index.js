@@ -1,4 +1,4 @@
-import Container from '../components/Container';
+import PageWrapper from '../components/PageWrapper';
 import ImageTile from '../components/ImageTile';
 import SEO from '../components/SEO';
 
@@ -15,7 +15,7 @@ const Home = (props) => {
         url="https://www.jamessam.com/"
         image={props.fields.favicon.fields.file.url}
       />
-      <Container>
+      <PageWrapper>
         <div style={{ paddingTop: '10px', textAlign: 'center' }}>
           <ImageTile destination="/about" image={images[0]} />
           <ImageTile
@@ -31,7 +31,7 @@ const Home = (props) => {
             image={images[3]}
           />
         </div>
-      </Container>
+      </PageWrapper>
     </div>
   );
 };
