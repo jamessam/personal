@@ -12,7 +12,9 @@ const PageWrapper = ({ children }) => (
 export default PageWrapper;
 
 const styles = {
+  paddingLeft: '15px',
+  paddingRight: '15px',
   margin: '0 auto',
-  maxWidth: '760px',
+  maxWidth: '740px',
   textAlign: 'justify',
 };
