@@ -14,7 +14,7 @@ const ImageTile = ({ image, destination }) => {
   } else {
     return (
       <Link href={destination}>
-        <a target="_blank" rel="noopener noreferrer">
+        <a>
           <img
             src={`${image.fields.file.url}?w=${imageSize}&h=${imageSize}`}
             alt={image.fields.description}

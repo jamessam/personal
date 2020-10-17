@@ -36,7 +36,7 @@ const Home = (props) => {
   );
 };
 
-Home.getInitialProps = async (ctx) => {
+Home.getInitialProps = async () => {
   const homePages = await client.getEntries({
     content_type: 'page',
     'fields.slug': '/',
