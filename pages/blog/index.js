@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import { BlogSummary } from './_utils';
 import PageWrapper from '../../components/PageWrapper';
 import SEO from '../../components/SEO';
 
@@ -26,30 +25,6 @@ const BlogHome = (props) => {
 
 export default BlogHome;
 
-const BlogSummary = ({ blog }) => {
-  let urlSlug = `/blog/${blog.fields.slug}`;
-  let category = blog.fields.category;
-  let categorySlug = !category ? '/' : `categories/${category.fields.slug}`;
-  let categoryName = !category ? 'not categorized' : category.fields.name;
-
-  return (
-    <div>
-      <Link href={urlSlug}>
-        <a style={styles.headings}>
-          <h3 style={{ marginBottom: '0' }}>{blog.fields.title}</h3>
-          <div>
-            <Link href={categorySlug}>
-              <a style={styles.categoryStyle}>{categoryName}</a>
-            </Link>
-            <br />
-            {blog.fields.writtenOn} | {blog.fields.shortDescription}
-          </div>
-        </a>
-      </Link>
-    </div>
-  );
-};
-
 BlogHome.getInitialProps = async () => {
   const blogPosts = await client.getEntries({
     content_type: 'blog',
@@ -63,14 +38,3 @@ const client = createClient({
   accessToken: process.env.ACCESS_TOKEN,
   environment: process.env.ENVIRONMENT_ID,
 });
-
-const styles = {
-  categoryStyle: {
-    fontVariantCaps: 'all-small-caps',
-    color: '#999999',
-  },
-  headings: {
-    color: 'inherit',
-    textDecoration: 'none',
-  },
-};
