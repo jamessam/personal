@@ -1,35 +1,56 @@
-import PageWrapper from '../components/PageWrapper';
-import SEO from '../components/SEO';
-
+import PageWrapper from '../../components/PageWrapper';
+import SEO from '../../components/SEO';
 import { createClient } from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-const About = (props) => {
-  const { seoObject, body } = props.fields;
-  const bodyData = convertBody(body);
+const BlogPage = (props) => {
+  const { blog } = props;
+  const fullTitle = `Jim Sam | ${blog.fields.title}`;
+  const url = `http://jamessam.com/blog/${blog.fields.slug}`;
+  const body = convertBody(blog.fields.body);
+  let category = blog.fields.category;
+  let categoryName = !category ? 'not categorized' : category.fields.name;
 
   return (
     <div>
       <SEO
-        title={`Jim Sam | ${seoObject.fields.title}`}
-        description={seoObject.fields.description}
-        url="https://www.jamessam.com/"
-        image={seoObject.fields.image.fields.file.url}
+        title={fullTitle}
+        description={blog.fields.shortDescription}
+        url={url}
       />
-      <PageWrapper>{bodyData}</PageWrapper>
+      <PageWrapper>
+        <h1>
+          <a
+            href={blog.fields.inspiration}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: 'rgba(0, 0, 0, 0.75)',
+              textDecoration: 'none',
+            }}
+          >
+            {blog.fields.title}
+          </a>
+        </h1>
+        <blockquote style={{ fontSize: 'small' }}>
+          {blog.fields.writtenOn} | <span>{categoryName}</span>
+        </blockquote>
+        <div>{body}</div>
+      </PageWrapper>
     </div>
   );
 };
 
-About.getInitialProps = async () => {
-  const aboutPages = await client.getEntries({
-    content_type: 'sitePage',
-    'fields.title': 'About Page',
-  });
-  return aboutPages.items[0];
-};
+export default BlogPage;
 
-export default About;
+BlogPage.getInitialProps = async (context) => {
+  const blog = await client.getEntries({
+    content_type: 'blog',
+    'fields.slug': context.query.blog,
+  });
+
+  return { blog: blog.items[0] };
+};
 
 const client = createClient({
   space: process.env.SPACE_ID,
@@ -38,7 +59,7 @@ const client = createClient({
 });
 
 // This is ugly, but convertBody() and parseSocial() are the same code from the
-// blog template. If you modify this, consider updating the blog template.
+// About page. If you modify this, consider updating the about page.
 //
 // I structured it this way because I wanted the blog code to be as self-
 // contained as possible.
