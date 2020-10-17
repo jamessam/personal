@@ -1,11 +1,11 @@
 import Header from './Header';
-// import Footer from './Footer';
+import Footer from './Footer';
 
 const Container = ({ children }) => (
   <div>
     <Header />
     <div style={styles}>{children}</div>
-    {/* <Footer /> */}
+    <Footer />
   </div>
 );
 
