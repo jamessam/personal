@@ -11,7 +11,11 @@ class SEO extends Component {
 
   render() {
     let { props } = this;
-    let favicon = `${props.image}?w=48&h=48`;
+    let iconBase = props.image;
+    let iconDefault =
+      'https://images.ctfassets.net/lbjjzq6veg5e/1sbZI9w2AYkcemuYWIQIg2/029ff5c1b36c1b09edf92e14d9692147/jim.jpg?w=48&h=48';
+    let favicon = !iconBase ? iconDefault : `${props.image}?w=48&h=48`;
+
     return (
       <Head>
         {/* General tags */}
