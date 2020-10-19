@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <div style={styles.footerBox} role="Footer">
-      <hr data-testid="divider" />
+    <div style={styles.footerBox} role="footer">
+      <hr id="footer-line" />
       Copyright © Jim Sam
     </div>
   );

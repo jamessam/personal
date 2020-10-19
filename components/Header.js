@@ -2,11 +2,13 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <div style={styles.outerDiv}>
+    <header style={styles.outerDiv} role="header">
       <div style={styles.textBox}>
-        <div style={{ textAlign: 'center' }}>
+        <nav style={{ textAlign: 'center' }} role="navigation">
           <Link href="/">
-            <a style={styles.linkStyle}>Jim Sam</a>
+            <a style={styles.linkStyle} title="link to home">
+              Jim Sam
+            </a>
           </Link>{' '}
           |
           <Link href="/about">
@@ -20,9 +22,9 @@ const Header = () => {
           <Link href="/contact">
             <a style={styles.linkStyle}>Contact</a>
           </Link>
-        </div>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 };
 
