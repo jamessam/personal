@@ -1,4 +1,4 @@
-import { BlogSummary } from '../_utils';
+import { BlogSummary } from '../../../utils';
 import PageWrapper from '../../../components/PageWrapper';
 import SEO from '../../../components/SEO';
 import { createClient } from 'contentful';
