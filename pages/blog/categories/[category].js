@@ -3,7 +3,7 @@ import PageWrapper from '../../../components/PageWrapper';
 import SEO from '../../../components/SEO';
 import { createClient } from 'contentful';
 
-const Category = (props) => {
+export default function category(props) {
   const { blogs, category, categoryID } = props;
 
   return (
@@ -23,12 +23,11 @@ const Category = (props) => {
       </PageWrapper>
     </div>
   );
-};
+}
 
-export default Category;
+export async function getStaticProps({ params, preview = false }) {
+  const { category } = params;
 
-Category.getInitialProps = async (context) => {
-  const { category } = context.query;
   const categories = await client.getEntries({
     content_type: 'category',
     'fields.slug': category,
@@ -39,11 +38,26 @@ Category.getInitialProps = async (context) => {
   });
 
   return {
-    blogs: blogs.items,
-    category: categories.items[0].fields.name,
-    categoryID: categories.items[0].sys.id,
+    props: {
+      preview,
+      blogs: blogs.items,
+      category: categories.items[0].fields.name,
+      categoryID: categories.items[0].sys.id,
+    },
   };
-};
+}
+
+export async function getStaticPaths() {
+  const categories = await client.getEntries({ content_type: 'category' });
+
+  return {
+    paths:
+      categories.items?.map((entry) => {
+        return `/blog/categories/${entry.fields.slug}`;
+      }) ?? [],
+    fallback: false,
+  };
+}
 
 const client = createClient({
   space: process.env.SPACE_ID,

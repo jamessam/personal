@@ -4,16 +4,16 @@ import SEO from '../components/SEO';
 
 import { createClient } from 'contentful';
 
-const Home = (props) => {
-  const images = props.fields.sections[0].fields.images;
+export default function home(props) {
+  const images = props.home.fields.sections[0].fields.images;
 
   return (
     <div>
       <SEO
-        title={`Jim Sam | ${props.fields.title}`}
-        description={props.fields.abstract}
+        title={`Jim Sam | ${props.home.fields.title}`}
+        description={props.home.fields.abstract}
         url="https://www.jamessam.com/"
-        image={props.fields.favicon.fields.file.url}
+        image={props.home.fields.favicon.fields.file.url}
       />
       <PageWrapper>
         <div style={{ paddingTop: '10px', textAlign: 'center' }}>
@@ -34,17 +34,21 @@ const Home = (props) => {
       </PageWrapper>
     </div>
   );
-};
+}
 
-Home.getInitialProps = async () => {
+export async function getStaticProps({ params, preview = false }) {
   const homePages = await client.getEntries({
     content_type: 'page',
     'fields.slug': '/',
   });
-  return homePages.items[0];
-};
 
-export default Home;
+  return {
+    props: {
+      preview,
+      home: homePages.items[0],
+    },
+  };
+}
 
 const client = createClient({
   space: process.env.SPACE_ID,

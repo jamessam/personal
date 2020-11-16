@@ -4,8 +4,8 @@ import SEO from '../components/SEO';
 import { createClient } from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-const About = (props) => {
-  const { seoObject, body } = props.fields;
+export default function about(props) {
+  const { seoObject, body } = props.about.fields;
   const bodyData = convertBody(body);
 
   return (
@@ -19,17 +19,21 @@ const About = (props) => {
       <PageWrapper>{bodyData}</PageWrapper>
     </div>
   );
-};
+}
 
-About.getInitialProps = async () => {
+export async function getStaticProps({ params, preview = false }) {
   const aboutPages = await client.getEntries({
     content_type: 'sitePage',
     'fields.title': 'About Page',
   });
-  return aboutPages.items[0];
-};
 
-export default About;
+  return {
+    props: {
+      preview,
+      about: aboutPages.items[0],
+    },
+  };
+}
 
 const client = createClient({
   space: process.env.SPACE_ID,

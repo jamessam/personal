@@ -4,16 +4,16 @@ import SEO from '../components/SEO';
 
 import { createClient } from 'contentful';
 
-const Contact = (props) => {
-  const images = props.fields.sections[0].fields.images;
+export default function contact(props) {
+  const images = props.contact.fields.sections[0].fields.images;
 
   return (
     <div>
       <SEO
-        title={`Jim Sam | ${props.fields.title}`}
-        description={props.fields.abstract}
+        title={`Jim Sam | ${props.contact.fields.title}`}
+        description={props.contact.fields.abstract}
         url="https://www.jamessam.com/"
-        image={props.fields.favicon.fields.file.url}
+        image={props.contact.fields.favicon.fields.file.url}
       />
       <PageWrapper>
         <div style={{ paddingTop: '10px', textAlign: 'center' }}>
@@ -29,17 +29,21 @@ const Contact = (props) => {
       </PageWrapper>
     </div>
   );
-};
+}
 
-Contact.getInitialProps = async () => {
+export async function getStaticProps({ params, preview = false }) {
   const contactPages = await client.getEntries({
     content_type: 'page',
     'fields.slug': 'contact',
   });
-  return contactPages.items[0];
-};
 
-export default Contact;
+  return {
+    props: {
+      preview,
+      contact: contactPages.items[0],
+    },
+  };
+}
 
 const client = createClient({
   space: process.env.SPACE_ID,

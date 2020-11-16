@@ -4,8 +4,8 @@ import SEO from '../../components/SEO';
 
 import { createClient } from 'contentful';
 
-const BlogHome = (props) => {
-  const blogs = props.items;
+export default function blogHome(props) {
+  const { blogs } = props;
 
   return (
     <div>
@@ -21,17 +21,21 @@ const BlogHome = (props) => {
       </PageWrapper>
     </div>
   );
-};
+}
 
-export default BlogHome;
-
-BlogHome.getInitialProps = async () => {
+export async function getStaticProps({ params, preview = false }) {
   const blogPosts = await client.getEntries({
     content_type: 'blog',
     order: '-fields.writtenOn',
   });
-  return blogPosts;
-};
+
+  return {
+    props: {
+      preview,
+      blogs: blogPosts.items,
+    },
+  };
+}
 
 const client = createClient({
   space: process.env.SPACE_ID,
