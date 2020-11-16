@@ -3,7 +3,7 @@ import SEO from '../../components/SEO';
 import { createClient } from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-const BlogPage = (props) => {
+export default function BlogPage(props) {
   const { blog } = props;
   const fullTitle = `Jim Sam | ${blog.fields.title}`;
   const url = `http://jamessam.com/blog/${blog.fields.slug}`;
@@ -39,18 +39,32 @@ const BlogPage = (props) => {
       </PageWrapper>
     </div>
   );
-};
+}
 
-export default BlogPage;
-
-BlogPage.getInitialProps = async (context) => {
+export async function getStaticProps({ params, preview = false }) {
   const blog = await client.getEntries({
     content_type: 'blog',
-    'fields.slug': context.query.blog,
+    'fields.slug': params.blog,
   });
 
-  return { blog: blog.items[0] };
-};
+  return {
+    props: {
+      preview,
+      blog: blog?.items[0] ?? null,
+    },
+  };
+}
+
+export async function getStaticPaths() {
+  const blogs = await client.getEntries({ content_type: 'blog' });
+  return {
+    paths:
+      blogs.items?.map((entry) => {
+        return `/blog/${entry.fields.slug}`;
+      }) ?? [],
+    fallback: false,
+  };
+}
 
 const client = createClient({
   space: process.env.SPACE_ID,
