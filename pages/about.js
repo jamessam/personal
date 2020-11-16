@@ -1,7 +1,6 @@
 import PageWrapper from '../components/PageWrapper';
 import SEO from '../components/SEO';
-
-import { createClient } from 'contentful';
+import { client } from '../utils';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 export default function about(props) {
@@ -34,12 +33,6 @@ export async function getStaticProps({ params, preview = false }) {
     },
   };
 }
-
-const client = createClient({
-  space: process.env.SPACE_ID,
-  accessToken: process.env.ACCESS_TOKEN,
-  environment: process.env.ENVIRONMENT_ID,
-});
 
 // This is ugly, but convertBody() and parseSocial() are the same code from the
 // blog template. If you modify this, consider updating the blog template.

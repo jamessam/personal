@@ -1,7 +1,7 @@
 import { BlogSummary } from '../../../utils';
 import PageWrapper from '../../../components/PageWrapper';
 import SEO from '../../../components/SEO';
-import { createClient } from 'contentful';
+import { client } from '../../../utils';
 
 export default function category(props) {
   const { blogs, category, categoryID } = props;
@@ -58,9 +58,3 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-
-const client = createClient({
-  space: process.env.SPACE_ID,
-  accessToken: process.env.ACCESS_TOKEN,
-  environment: process.env.ENVIRONMENT_ID,
-});

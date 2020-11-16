@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { createClient } from 'contentful';
 
 export const BlogSummary = ({ blog }) => {
   let urlSlug = `/blog/${blog.fields.slug}`;
@@ -36,3 +37,10 @@ const styles = {
     textDecoration: 'none',
   },
 };
+
+export const client = createClient({
+  host: process.env.HOST,
+  space: process.env.SPACE_ID,
+  accessToken: process.env.ACCESS_TOKEN,
+  environment: process.env.ENVIRONMENT_ID,
+});

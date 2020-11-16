@@ -1,8 +1,7 @@
 import PageWrapper from '../components/PageWrapper';
 import ImageTile from '../components/ImageTile';
 import SEO from '../components/SEO';
-
-import { createClient } from 'contentful';
+import { client } from '../utils';
 
 export default function contact(props) {
   const images = props.contact.fields.sections[0].fields.images;
@@ -44,9 +43,3 @@ export async function getStaticProps({ params, preview = false }) {
     },
   };
 }
-
-const client = createClient({
-  space: process.env.SPACE_ID,
-  accessToken: process.env.ACCESS_TOKEN,
-  environment: process.env.ENVIRONMENT_ID,
-});
