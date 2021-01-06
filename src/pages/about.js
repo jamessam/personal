@@ -42,6 +42,9 @@ export async function getStaticProps({ params, preview = false }) {
 const convertBody = (rawJSON) => {
   const options = {
     renderNode: {
+      'embedded-asset-block': (node) => {
+        return parseAsset(node);
+      },
       'embedded-entry-block': (node) => {
         const socialEmbed = parseSocial(node.data.target);
         return (
@@ -52,9 +55,39 @@ const convertBody = (rawJSON) => {
           />
         );
       },
+      'embedded-entry-inline': (node) => {
+        return parseInlineEntry(node);
+      },
+      'entry-hyperlink': (node) => {
+        return parseHyperlink(node);
+      },
     },
   };
   return documentToReactComponents(rawJSON, options);
+};
+
+const parseAsset = (node) => {
+  let description = node.data.target.fields.description;
+  let url = node.data.target.fields.file.url;
+  return <img src={url} alt={description} />;
+};
+
+const parseHyperlink = (node) => {
+  let contentType = node.data.target.sys.contentType.sys.id;
+  if (contentType === 'category') {
+    return constructLink(node);
+  } else {
+    return 'future link';
+  }
+};
+
+const parseInlineEntry = (node) => {
+  let contentType = node.data.target.sys.contentType.sys.id;
+  if (contentType === 'category') {
+    return constructLink(node);
+  } else {
+    return 'future link';
+  }
 };
 
 const parseSocial = (entry) => {
@@ -67,4 +100,14 @@ const parseSocial = (entry) => {
     result = entry.fields.embedCode;
   }
   return result;
+};
+
+const constructLink = (node) => {
+  let destination = node.data.target.fields.slug;
+  let text = node.data.target.fields.name;
+  return (
+    <Link href={`/blog/categories/${destination}/`}>
+      <a>{text}</a>
+    </Link>
+  );
 };
