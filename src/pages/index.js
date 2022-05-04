@@ -13,6 +13,7 @@ export default function home(props) {
         description={props.home.fields.abstract}
         url="https://www.jamessam.com/"
         image={props.home.fields.favicon.fields.file.url}
+        extraMessage={`At the time of loading, it is ${props.time}`}
       />
       <PageWrapper>
         <div style={{ paddingTop: '10px', textAlign: 'center' }}>
@@ -35,16 +36,18 @@ export default function home(props) {
   );
 }
 
-export async function getStaticProps({ params, preview = false }) {
+export async function getServerSideProps() {
   const homePages = await client.getEntries({
     content_type: 'page',
     'fields.slug': '/',
   });
 
+  const current = new Date();
+
   return {
     props: {
-      preview,
       home: homePages.items[0],
+      time: current.toLocaleTimeString(),
     },
   };
 }

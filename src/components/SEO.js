@@ -39,6 +39,8 @@ class SEO extends Component {
         <meta name="twitter:title" content={props.title} />
         <meta name="twitter:description" content={props.description} />
         <meta name="twitter:image" content="https://www.jamessam.com/jim.jpg" />
+
+        <meta name="demonstration" content={props.extraMessage} />
       </Head>
     );
   }
