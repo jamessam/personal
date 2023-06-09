@@ -1,7 +1,7 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 const ImageTile = ({ image, destination }) => {
-  if (destination.startsWith('http')) {
+  if (destination.startsWith("http")) {
     return (
       <a href={destination} target="_blank" rel="noopener noreferrer">
         <img
@@ -13,7 +13,7 @@ const ImageTile = ({ image, destination }) => {
     );
   } else {
     return (
-      <Link href={destination}>
+      <Link href={destination} passHref legacyBehavior>
         <a>
           <img
             src={`${image.fields.file.url}?w=${imageSize}&h=${imageSize}`}
