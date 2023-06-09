@@ -69,7 +69,7 @@ const BlogSummary = ({ blog }) => {
 
   return (
     <div>
-      <Link href={urlSlug}>
+      <Link href={urlSlug} passHref legacyBehavior>
         <a style={styles.headings}>
           <h3 style={{ marginBottom: "0" }}>{blog.fields.title}</h3>
           <div>

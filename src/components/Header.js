@@ -11,7 +11,7 @@ const Header = () => {
             </a>
           </Link>{" "}
           |
-          <Link href="/about">
+          <Link href="/about" passHref legacyBehavior>
             <a style={styles.linkStyle}>About</a>
           </Link>{" "}
           |
