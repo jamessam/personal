@@ -1,7 +1,8 @@
-import Link from "next/link";
-import { client } from "../../../utils";
-import PageWrapper from "../../../components/PageWrapper";
-import SEO from "../../../components/SEO";
+import Link from 'next/link';
+import { client } from '../../../utils';
+import PageWrapper from '../../../components/PageWrapper';
+import SEO from '../../../components/SEO';
+import BlogSummary from '../../../components/BlogSummary';
 
 export default function category(props) {
   const { blogs, category, categoryID } = props;
@@ -29,8 +30,8 @@ export async function getStaticProps({ params, preview = false }) {
   const { category } = params;
 
   const categories = await client.getEntries({
-    content_type: "category",
-    "fields.slug": category,
+    content_type: 'category',
+    'fields.slug': category,
   });
 
   const blogs = await client.getEntries({
@@ -48,7 +49,7 @@ export async function getStaticProps({ params, preview = false }) {
 }
 
 export async function getStaticPaths() {
-  const categories = await client.getEntries({ content_type: "category" });
+  const categories = await client.getEntries({ content_type: 'category' });
 
   return {
     paths:
@@ -58,40 +59,3 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-
-const BlogSummary = ({ blog }) => {
-  let urlSlug = `/blog/${blog.fields.slug}`;
-  let category = blog.fields.category;
-  let categorySlug = !category
-    ? "/"
-    : `/blog/categories/${category.fields.slug}`;
-  let categoryName = !category ? "not categorized" : category.fields.name;
-
-  return (
-    <div>
-      <Link href={urlSlug}>
-        <a style={styles.headings}>
-          <h3 style={{ marginBottom: "0" }}>{blog.fields.title}</h3>
-          <div>
-            {blog.fields.writtenOn} | {blog.fields.shortDescription}
-          </div>
-        </a>
-      </Link>
-      <Link href={categorySlug} passHref legacyBehavior>
-        <a style={styles.categoryStyle}>{categoryName}</a>
-      </Link>
-      <br />
-    </div>
-  );
-};
-
-const styles = {
-  categoryStyle: {
-    fontVariantCaps: "all-small-caps",
-    color: "#999999",
-  },
-  headings: {
-    color: "inherit",
-    textDecoration: "none",
-  },
-};
