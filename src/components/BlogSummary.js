@@ -7,7 +7,8 @@ const BlogSummary = ({ blog }) => {
   let categorySlug = !category
     ? '/'
     : `/blog/categories/${category.fields.slug}`;
-  let categoryName = !category ? 'not categorized' : category.fields.name;
+  let categories = blog.fields.categories || [];
+  let categoryNames = categories.map((category) => category.fields.name);
 
   return (
     <div>
@@ -19,9 +20,14 @@ const BlogSummary = ({ blog }) => {
           </div>
         </a>
       </Link>
-      <Link href={categorySlug} passHref legacyBehavior>
-        <a style={styles.categoryStyle}>{categoryName}</a>
-      </Link>
+      {categoryNames.map((categoryName, index) => (
+        <React.Fragment key={categoryName}>
+          {index > 0 && ' | '}
+          <Link href={categorySlug} passHref legacyBehavior>
+            <a style={styles.categoryStyle}>{categoryName}</a>
+          </Link>
+        </React.Fragment>
+      ))}
       <br />
     </div>
   );

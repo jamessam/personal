@@ -8,8 +8,8 @@ export default function BlogPage(props) {
   const fullTitle = `Jim Sam | ${blog.fields.title}`;
   const url = `http://jamessam.com/blog/${blog.fields.slug}`;
   const body = convertBody(blog.fields.body);
-  let category = blog.fields.category;
-  let categoryName = !category ? 'not categorized' : category.fields.name;
+  const categories = blog.fields.categories;
+  const categoryNames = categories.map((category) => category.fields.name);
 
   return (
     <div>
@@ -33,7 +33,10 @@ export default function BlogPage(props) {
           </a>
         </h1>
         <blockquote style={{ fontSize: 'small' }}>
-          {blog.fields.writtenOn} | <span>{categoryName}</span>
+          {blog.fields.writtenOn}
+          {categoryNames.map((categoryName) => (
+            <span key={categoryName}> | {categoryName}</span>
+          ))}
         </blockquote>
         <div>{body}</div>
       </PageWrapper>

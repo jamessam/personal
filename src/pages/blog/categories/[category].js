@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { client } from '../../../utils';
 import PageWrapper from '../../../components/PageWrapper';
 import SEO from '../../../components/SEO';
