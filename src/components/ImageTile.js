@@ -1,7 +1,7 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 const ImageTile = ({ image, destination }) => {
-  if (destination.startsWith("http")) {
+  if (destination.startsWith('http')) {
     return (
       <a href={destination} target="_blank" rel="noopener noreferrer">
         <img
@@ -33,4 +33,5 @@ const imageSize = 320;
 const imageStyle = {
   flex: `0 0 ${imageSize}`,
   margin: `1%`,
+  padding: 0,
 };
