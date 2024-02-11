@@ -4,11 +4,8 @@ import Link from 'next/link';
 const BlogSummary = ({ blog }) => {
   let urlSlug = `/blog/${blog.fields.slug}`;
   let category = blog.fields.category;
-  let categorySlug = !category
-    ? '/'
-    : `/blog/categories/${category.fields.slug}`;
+
   let categories = blog.fields.categories || [];
-  let categoryNames = categories.map((category) => category.fields.name);
 
   return (
     <div>
@@ -20,14 +17,17 @@ const BlogSummary = ({ blog }) => {
           </div>
         </a>
       </Link>
-      {categoryNames.map((categoryName, index) => (
-        <React.Fragment key={categoryName}>
-          {index > 0 && ' | '}
-          <Link href={categorySlug} passHref legacyBehavior>
-            <a style={styles.categoryStyle}>{categoryName}</a>
-          </Link>
-        </React.Fragment>
-      ))}
+      {categories.map((category, index) => {
+        let categorySlug = `blog/categories/${category.fields.slug}`;
+        return (
+          <React.Fragment key={category.fields.slug}>
+            {index > 0 && ' | '}
+            <Link href={categorySlug} passHref legacyBehavior>
+              <a style={styles.categoryStyle}>{category.fields.name}</a>
+            </Link>
+          </React.Fragment>
+        );
+      })}
       <br />
     </div>
   );
