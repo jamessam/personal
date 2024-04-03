@@ -73,6 +73,9 @@ hr {
 
 ol, ul {
   margin-left: 5px;
+  p {
+    margin: 1px;
+  }
 }
 
 p {

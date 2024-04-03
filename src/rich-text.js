@@ -30,9 +30,16 @@ export default function convertBody(rawJSON) {
 }
 
 const parseAsset = (node) => {
+  let assetStyles = {
+    alignItems: `center`,
+    display: `block`,
+    margin: `5% auto`,
+    maxWidth: '75%',
+    padding: 0,
+  };
   let description = node.data.target.fields.description;
   let url = node.data.target.fields.file.url;
-  return <img src={url} alt={description} />;
+  return <img src={url} alt={description} style={assetStyles} />;
 };
 
 const parseEntryHyperlink = (node) => {
