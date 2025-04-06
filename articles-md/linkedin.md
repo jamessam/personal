@@ -20,7 +20,7 @@ Since Andrej Karpathy (@karpathy) had good success with ChatGPT, I loaded that u
 
 ## Coding
 
-You can see all my prompts [here](https://chatgpt.com/share/67f2a996-28c0-8001-bd4b-561c4a9c211b). I left all code as-is in order to fully grok vibe coding.
+You can see all my prompts [here](https://chatgpt.com/share/67f001b5-6e7c-8001-b019-382334f6ca07). I left all code as-is in order to fully grok vibe coding.
 
 Fascinating, the bulk of the time was not spent on the code, per se, but on areas around the code: how to deploy/share and issues around the extension icon. Repeating for those in the back: spending most of the time on deployment and design for a code project. Hmm. That never happens with 100% manually created code. Never.
 
