@@ -13,6 +13,13 @@ body {
     padding: 20px;
 }
 
+img {
+    width: 85%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 3%;
+}
+
 main section {
     margin-bottom: 40px;
 }
