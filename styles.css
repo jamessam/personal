@@ -13,6 +13,23 @@ body {
     padding: 20px;
 }
 
+footer {
+    text-align: left;
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 40px;
+}
+
+header {
+    text-align: left;
+    margin-bottom: 40px;
+
+    p {
+        font-size: 0.8em;
+        color: #777;
+    }
+}
+
 img {
     width: 85%;
     display: block;
@@ -34,9 +51,3 @@ main section h3 {
     margin-bottom: 10px;
 }
 
-footer {
-    text-align: left;
-    font-size: 0.8em;
-    color: #777;
-    margin-top: 40px;
-}
